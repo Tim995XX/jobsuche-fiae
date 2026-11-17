@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "jobsuche"
+version = "0.2.0"
+description = "Sucht Stellen für Fachinformatiker/innen Anwendungsentwicklung in mehreren Jobbörsen und bewertet sie nach Einsteigerfreundlichkeit"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+dependencies = [
+    "requests>=2.31",
+    "rich>=13",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+
+[project.scripts]
+jobsuche = "jobsuche.__main__:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
