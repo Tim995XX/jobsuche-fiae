@@ -2,7 +2,7 @@
 
 import xml.etree.ElementTree as ET
 
-from jobsuche.quellen import arbeitnow, bundesagentur, indeed, jobicy, remotive
+from jobsuche.quellen import arbeitnow, bundesagentur, jobicy, remotive
 
 # ─── Bundesagentur ───────────────────────────────────────────────────────────
 
@@ -77,7 +77,7 @@ def test_arbeitnow_filtert_titel_ort_und_doppelte_slugs():
     assert stellen[0].beschreibung == "Python"
 
 
-# ─── RSS (Jobicy, Indeed) ────────────────────────────────────────────────────
+# ─── Jobicy (RSS) ─────────────────────────────────────────────────────────────
 
 def _rss(*items: str) -> ET.Element:
     return ET.fromstring(f"<rss><channel>{''.join(items)}</channel></rss>")
@@ -97,10 +97,14 @@ def test_jobicy_parse_feed():
     assert stellen[0].beschreibung == "Remote Python"
 
 
-def test_indeed_trennt_firma_vom_titel():
-    wurzel = _rss("<item><title>Junior Developer - Beispiel AG</title><link>https://i/1</link></item>")
-    stelle = indeed.parse_feed(wurzel, set(), standard_ort="Leipzig")[0]
-    assert (stelle.titel, stelle.unternehmen, stelle.adresse) == ("Junior Developer", "Beispiel AG", "Beispiel AG, Leipzig")
+def test_jobicy_ignoriert_fremde_berufe_auch_wenn_beschreibung_developer_nennt():
+    wurzel = _rss(
+        "<item><title>Junior Campaign Manager</title><link>https://j/2</link>"
+        "<description>We build tools for developers.</description></item>",
+        "<item><title>Senior AP Accountant</title><link>https://j/3</link>"
+        "<description>Python, JavaScript, developer platform</description></item>",
+    )
+    assert jobicy.parse_feed(wurzel, set()) == []
 
 
 # ─── Remotive ────────────────────────────────────────────────────────────────

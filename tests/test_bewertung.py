@@ -35,7 +35,10 @@ def test_nicht_entwickler_stellen_werden_erkannt(titel):
     assert ist_nicht_entwickler_stelle(Stelle(titel=titel))
 
 
-@pytest.mark.parametrize("titel", ["Fachinformatiker Anwendungsentwicklung", "Backend Developer", "Junior Dev (Python)"])
+@pytest.mark.parametrize("titel", [
+    "Fachinformatiker Anwendungsentwicklung", "Backend Developer", "Junior Dev (Python)",
+    "Software Engineer – Python – Container Images", "Senior SoftwareEngineer",
+])
 def test_entwicklertitel_sind_relevant(titel):
     assert RELEVANTE_BERUFE_TITEL.search(titel)
 

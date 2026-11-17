@@ -67,6 +67,7 @@ RELEVANTE_BERUFE_TITEL = re.compile(
     r"|ios\s+(develop|entwickl)|app\s+(develop|entwickl)"
     r"|fiae\b|fisi\b|\bit.?entwickl|\bit-entwickl"
     r"|\bentwickler\b|\bdeveloper\b|\bprogrammierer\b"
+    r"|software\s*engineer"
     r"|\bcoding\b|\bdevops\b|data\s+engineer|cloud\s+engineer"
     r"|junior.{1,12}\b(dev|software|entwickl|programmer|coder)"
     r"|\bjunior\b.{1,5}\b(entwickler|developer|softwareentwickler|anwendungsentwickler)"

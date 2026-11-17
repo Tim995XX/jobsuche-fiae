@@ -5,7 +5,7 @@ import xml.etree.ElementTree as ET
 
 import requests
 
-from jobsuche.bewertung import RELEVANTE_BERUFE
+from jobsuche.bewertung import RELEVANTE_BERUFE_TITEL
 from jobsuche.modell import Stelle
 from jobsuche.text import kuerze, rss_datum, rss_feld, strip_html
 
@@ -13,7 +13,6 @@ log = logging.getLogger(__name__)
 
 NAME = "Jobicy.com"
 FEEDS = [
-    "https://jobicy.com/?feed=job_feed&job_categories=smm&job_types=full-time&search_keywords=developer",
     "https://jobicy.com/?feed=job_feed&job_categories=devops-sysadmin&search_keywords=developer",
     "https://jobicy.com/?feed=job_feed&search_keywords=softwareentwickler",
     "https://jobicy.com/?feed=job_feed&search_keywords=anwendungsentwicklung",
@@ -44,7 +43,9 @@ def parse_feed(wurzel: ET.Element, gesehen: set[str]) -> list[Stelle]:
         link = rss_feld(item, "link")
         if link in gesehen:
             continue
-        if not RELEVANTE_BERUFE.search(f"{titel} {rss_feld(item, 'description')}".lower()):
+        # Nur der Titel zählt: Fast jede Firmenbeschreibung erwähnt "developer",
+        # auch bei Stellen im Marketing oder in der Buchhaltung.
+        if not RELEVANTE_BERUFE_TITEL.search(titel):
             continue
         gesehen.add(link)
         stellen.append(Stelle(

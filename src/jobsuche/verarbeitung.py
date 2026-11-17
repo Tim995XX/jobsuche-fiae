@@ -36,5 +36,10 @@ def bewerte(stellen: list[Stelle]) -> None:
 
 
 def sortiere(stellen: list[Stelle]) -> list[Stelle]:
-    """Nach Einsteiger-Score absteigend, dann nach Veröffentlichungsdatum."""
-    return sorted(stellen, key=lambda s: (-s.einsteiger_score, s.veroeffentlicht))
+    """Nach Einsteiger-Score absteigend, bei gleichem Score die neuesten zuerst.
+
+    Zwei stabile Sortierungen: erst nach Datum (neu → alt, ohne Datum ans Ende),
+    dann nach Score; die Datumsreihenfolge bleibt innerhalb gleicher Scores erhalten.
+    """
+    nach_datum = sorted(stellen, key=lambda s: s.veroeffentlicht, reverse=True)
+    return sorted(nach_datum, key=lambda s: -s.einsteiger_score)

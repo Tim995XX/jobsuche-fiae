@@ -11,10 +11,9 @@ from jobsuche.modell import Stelle
 @pytest.fixture
 def quellen(monkeypatch):
     """Ersetzt alle Quellen; gibt ein Dict zurück, in das ein Test Treffer je Quelle legt."""
-    treffer = {"ba": [], "arbeitnow": [], "indeed": [], "jobicy": [], "remotive": []}
+    treffer = {"ba": [], "arbeitnow": [], "jobicy": [], "remotive": []}
     monkeypatch.setattr(cli.bundesagentur, "suche", lambda ort, umkreis: treffer["ba"])
     monkeypatch.setattr(cli.arbeitnow, "suche", lambda ort: treffer["arbeitnow"])
-    monkeypatch.setattr(cli.indeed, "suche", lambda ort: treffer["indeed"])
     monkeypatch.setattr(cli.jobicy, "suche", lambda: treffer["jobicy"])
     monkeypatch.setattr(cli.remotive, "suche", lambda: treffer["remotive"])
     return treffer

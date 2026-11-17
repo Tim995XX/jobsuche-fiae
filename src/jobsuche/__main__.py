@@ -10,7 +10,7 @@ from rich.logging import RichHandler
 
 from jobsuche import ausgabe, verarbeitung
 from jobsuche.modell import Stelle
-from jobsuche.quellen import arbeitnow, bundesagentur, indeed, jobicy, remotive
+from jobsuche.quellen import arbeitnow, bundesagentur, jobicy, remotive
 
 TITEL = "Stellenangebote: Fachinformatiker Anwendungsentwicklung"
 
@@ -32,7 +32,6 @@ def sammle(console: Console, ort: str, umkreis: int) -> list[Stelle]:
     quellen = [
         ("Bundesagentur für Arbeit", lambda: bundesagentur.suche(ort, umkreis)),
         ("Arbeitnow.com", lambda: arbeitnow.suche(ort)),
-        ("Indeed.de (RSS)", lambda: indeed.suche(ort)),
         ("Jobicy.com (RSS Remote)", jobicy.suche),
         ("Remotive.com (Remote DE/EU/Worldwide)", remotive.suche),
     ]
