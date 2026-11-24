@@ -93,6 +93,10 @@ Fehler behoben, jeweils mit Regressionstest (siehe Git-Historie):
 - Der Score ist eine Heuristik mit festen Punktwerten, kein trainiertes Modell.
 - Jobicy und Remotive sind internationale Remote-Börsen; viele Treffer sind englischsprachig.
 
+## Hinweis
+
+Dieses Projekt wurde mithilfe von Claude (Anthropic) erstellt.
+
 ## Lizenz
 
 MIT, siehe [LICENSE](LICENSE).
