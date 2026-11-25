@@ -1,5 +1,7 @@
 # Jobsuche Fachinformatiker Anwendungsentwicklung
 
+[![CI](https://github.com/Tim995XX/jobsuche-fiae/actions/workflows/ci.yml/badge.svg)](https://github.com/Tim995XX/jobsuche-fiae/actions/workflows/ci.yml)
+
 Ein Kommandozeilenwerkzeug, das mehrere Jobbörsen gleichzeitig nach Stellen für
 Fachinformatiker/innen Anwendungsentwicklung durchsucht, Duplikate zusammenführt, fachfremde
 Stellen aussortiert und jede Stelle danach bewertet, wie einsteigerfreundlich sie ist.
